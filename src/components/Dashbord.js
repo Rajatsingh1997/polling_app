@@ -3,7 +3,7 @@ import React from 'react'
 export default function Dashbord() {
     return (
         <div>
-            <h1> Dashbord here </h1>
+            <h1>gdfhdgf</h1>
         </div>
     )
 }
