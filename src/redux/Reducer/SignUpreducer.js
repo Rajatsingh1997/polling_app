@@ -1,4 +1,4 @@
-import * as action from '../Action/action';
+import * as actions from "../constant";
 
 
 const initialState = {
@@ -8,19 +8,19 @@ isSignedUp:false,
 
 export const SignUpreducer = (state=initialState,action) =>{
     switch(action.type){
-        case action.SIGN_UP_REQUEST:
+        case actions.SIGN_UP_REQUEST:
             return{
                 ...state,
                 isLoading:true,
             };
-        case action.SIGN_UP_SUCCESS:
+        case actions.SIGN_UP_SUCCESS:
             return{
                 ...state,
                 isSignedUp:true,
                 isLoading: false,
                 response: action.payload,
             };
-        case action.SIGN_UP_ERROR:
+        case actions.SIGN_UP_ERROR:
             return{
                 ...state,
                 isSignedUp: false,

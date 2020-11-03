@@ -1,26 +1,26 @@
-import * as action from '../Action/action';
+import * as actions from "../constant";
+
 const initialState={
     isLoading:false,
     isSignedIn:false,
-}
+};
 export const SignInreducer =(state=initialState,action)=>{
     switch(action.type){
-        case action.SIGN_IN_REQUEST:
+        case actions.SIGN_IN_REQUEST:
             return{
                 ...state,
-                isloading:true,
+                isLoading:true,
             }
-            case action.SIGN_IN_SUCCESS:
+            case actions.SIGN_IN_SUCCESS:
                 return{
                     ...state,
-                    isSignedUp:true,
+                    isSignedIn:true,
                     isLoading: false,
                     response: action.payload,
                 };
-            case action.SIGN_IN_ERROR:
+            case actions.SIGN_IN_ERROR:
                 return{
-                    ...state,
-                    isSignedUp: false,
+                    isSignedIn: false,
                     isLoading:false,
                     error: action.payload,
                 };

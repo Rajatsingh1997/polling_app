@@ -1,8 +1,8 @@
 import React, { useState,useEffect } from "react";
-import { Form, Button, Navbar,Container } from "react-bootstrap";
+import { Form, Button, Navbar,Container, Spinner } from "react-bootstrap";
 import "./SignInfrm.css";
-import { Link } from "react-router-dom";
-import { SignInRequest } from "../redux/Action/action";
+import { Link, useHistory } from "react-router-dom";
+import { SignInRequest } from "../redux/action/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function SignInform(props) {
@@ -10,8 +10,12 @@ export default function SignInform(props) {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-  const loginState = useSelector((state) => state.LoginStatus);
-  console.log(loginState, "oooooooo");
+  const history =useHistory();
+
+  const loginState = useSelector((state) =>  state.LoginStatus);
+  // console.log(LoginState)
+
+
   
 
   const handleSubmit = () => {
@@ -22,24 +26,31 @@ export default function SignInform(props) {
     console.log(loginData);
 
     dispatch(SignInRequest(loginData));   // ( SignInrequest comes from action )
+    // console.log(loginState, "oooooooo");
+    
+    // if (localStorage.getItem("token")) {
+    //   props.history.push("/dashbord");
+    // }    
     setUser("");
     setPassword("");
   };
 
   useEffect(() => {
-    if (loginState.isSignedIn === true || localStorage.getItem("token")) {
-      if (loginState.response.toLowerCase() === "admin") {
+
+    if (localStorage.getItem("token")) {
+      if (loginState?.response?.toLowerCase() === "admin") {
         props.history.push("/dashbord");
-        localStorage.setItem("userType", loginState.response);
-      } else if (loginState.response.toLowerCase() === "guest") {
+        localStorage.setItem("userType", loginState.response.role);
+      } else if (loginState?.response?.toLowerCase() === "guest") {
         props.history.push("/success");
-        localStorage.setItem("userType", loginState.response);
+        localStorage.setItem("userType",loginState.response);
       } else {
         localStorage.clear();
         props.history.push("/");
       }
     }
-  }, [loginState.isSignedIn]);
+    });
+ 
 
   return (
     <>
@@ -55,10 +66,10 @@ export default function SignInform(props) {
       <div className="formdiv">
         <Form>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label className>Email address</Form.Label>
+            <Form.Label className>User</Form.Label>
             <Form.Control
-              type="email"
-              placeholder="Enter email"
+              type="text"
+              placeholder="user name"
               value={user}
               onChange={(e) => setUser(e.target.value)}
             />
@@ -77,16 +88,24 @@ export default function SignInform(props) {
           <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
-          <Link to="/dashbord">
             <Button
               variant="primary"
               type="submit"
               disabled={user && password ? false : true}
               onClick={handleSubmit}
             >
-              Login
+             {loginState.isLoading === true ? (
+                <Spinner
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              ) : (
+                <span>Login</span>
+              )}
+              {/* Login */}
             </Button>
-          </Link>
           
           <Container>
 
@@ -95,9 +114,6 @@ export default function SignInform(props) {
                 <h6 style={{ color: "Red" }}>{loginState.error}</h6>
               )}
 
-          {/* <Row>
-            <Col></Col>
-          </Row> */}
         </Container>
 
         </Form>
