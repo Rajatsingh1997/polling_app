@@ -5,6 +5,10 @@ import SignInsaga from "./SignInsaga";
 import { pollListSaga }  from "./pollListsaga";
 import { DeletePollSaga } from "./deletepollsaga";
 import { CreateNewPollSaga } from "./addNewpollsaga";
+import {UpdateTitleSaga} from "./updatepolltitlesaga";
+import { AddNewOptionSaga } from "./addnewoptionsaga";
+import { DeleteOptionSaga } from "./deleteoptionsaga";
+import {PollSaga} from "./pollsaga";
 
 function* watchAllSaga(){
     yield takeLatest (actions.SignUpRequest,SignUpsaga)
@@ -12,6 +16,10 @@ function* watchAllSaga(){
     yield takeLatest(actions.PollListRequest,pollListSaga)
     yield takeLatest(actions.DeletePollRequest,DeletePollSaga)
     yield takeLatest(actions.CreateNewPollRequest,CreateNewPollSaga)
+    yield takeLatest(actions.UpdatePollTitleRequest, UpdateTitleSaga)
+    yield takeLatest(actions.AddNewOptionRequest, AddNewOptionSaga)
+    yield takeLatest(actions.DeleteOptionRequest, DeleteOptionSaga)
+    yield takeLatest(actions.PollRequest, PollSaga)
 }
 
 export default function* rootSaga(){

@@ -12,7 +12,7 @@ import { PollListRequest } from "../redux/action/actions";
 import { DeletePollRequest } from "../redux/action/actions";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function Dashbord(props) {
+export default function Dashbord() {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -40,7 +40,7 @@ export default function Dashbord(props) {
 
   const handleLogout = () => {
     localStorage.clear();
-    props.history.push("/");
+    history.push("/");
   };
   return (
     <div>
@@ -55,7 +55,7 @@ export default function Dashbord(props) {
             <Spinner className="spinner" animation="grow" variant="dark" />
           </center>
         ) : null}
-        <Link to="/">
+        <Link to="/signinfrm">
           <Button variant="success" onClick={handleLogout}>
             Logout
           </Button>{" "}
@@ -76,12 +76,12 @@ export default function Dashbord(props) {
                         Votes: {option.vote}
                       </label>
                     </div>
-                  ))}
+                  ))}{}
                 </div>
                 <hr />
-                <Link to="/editpol">
-                <Button variant="warning">Edit Poll</Button>{" "}
-                </Link>
+                {/* <Link to="/editpol"> */}
+                <Button variant="warning" onClick={()=>history.push(`/editPol/${item._id}`)}>Edit Poll</Button>{" "}
+                {/* </Link> */}
                 <Button variant="danger" onClick={() => deletePoll(item._id)}>
                   Delete Poll
                 </Button>

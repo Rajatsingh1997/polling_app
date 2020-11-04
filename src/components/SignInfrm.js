@@ -13,10 +13,6 @@ export default function SignInform(props) {
   const history =useHistory();
 
   const loginState = useSelector((state) =>  state.LoginStatus);
-  // console.log(LoginState)
-
-
-  
 
   const handleSubmit = () => {
     let loginData = {
@@ -25,12 +21,7 @@ export default function SignInform(props) {
     };
     console.log(loginData);
 
-    dispatch(SignInRequest(loginData));   // ( SignInrequest comes from action )
-    // console.log(loginState, "oooooooo");
-    
-    // if (localStorage.getItem("token")) {
-    //   props.history.push("/dashbord");
-    // }    
+    dispatch(SignInRequest(loginData));   // ( SignInrequest comes from action )   
     setUser("");
     setPassword("");
   };
@@ -49,7 +40,7 @@ export default function SignInform(props) {
         props.history.push("/");
       }
     }
-    });
+    },[loginState.response]);
  
 
   return (
@@ -104,7 +95,6 @@ export default function SignInform(props) {
               ) : (
                 <span>Login</span>
               )}
-              {/* Login */}
             </Button>
           
           <Container>

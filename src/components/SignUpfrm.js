@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Form, Button, Navbar,Spinner,Container } from "react-bootstrap";
+import { Form, Button, Navbar, Spinner, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./SignUpfrm.css";
 import { SignUpRequest } from "../redux/action/actions";
 
@@ -13,7 +13,6 @@ export default function SignUpfrm() {
   const dispatch = useDispatch();
 
   const signupState = useSelector((state) => state.SignUpStatus);
-  console.log(signupState, "hhhhhhhhhhhhhh");
 
   const handleSubmit = () => {
     let formData = {
@@ -73,33 +72,31 @@ export default function SignUpfrm() {
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
 
-            <Button
-              variant="primary"
-              type="submit"
-              disabled={user && password ? false : true}
-              onClick={()=>handleSubmit()}
-            >
-              {signupState.isLoading === true
-                ?(
-                    <Spinner
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                  )
-                : null}
-              {signupState.isLoading === true ? null : <span>submit</span>}
-            </Button>
-            <Container>
-              {signupState.isSignedUp ? (
-                <h6 style={{ color: "black" }}>
-                  Registration Successful. Please login to continue...
-                </h6>
-              ) : (
-                <h6 style={{ color: "Red" }}>{signupState.error}</h6>
-              )}
-            </Container>
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={user && password ? false : true}
+            onClick={() => handleSubmit()}
+          >
+            {signupState.isLoading === true ? (
+              <Spinner
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+            ) : null}
+            {signupState.isLoading === true ? null : <span>submit</span>}
+          </Button>
+          <Container>
+            {signupState.isSignedUp ? (
+              <h6 style={{ color: "black" }}>
+                Registration Successful. Please login to continue...
+              </h6>
+            ) : (
+              <h6 style={{ color: "Red" }}>{signupState.error}</h6>
+            )}
+          </Container>
         </Form>
       </div>
     </>

@@ -41,13 +41,6 @@ function AddPoll() {
     localStorage.clear();
     history.push("/");
   };
-
-  const handleSubmit = () => {
-    let addquestion = {
-      title: title.trim(),
-    };
-    console.log(addquestion);
-  };
   if (pollstate.isLoading === true) {
     return <Redirect to="/dashbord" />;
   }
@@ -57,11 +50,9 @@ function AddPoll() {
       <Navbar bg="light" expand="lg" className="box0">
         <Navbar.Brand className="box">Polling Managment System </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav"></Navbar.Collapse>
-        <Link to="/">
-          <Button variant="success" onclick={handleLogout}>
-            Logout
-          </Button>{" "}
-        </Link>
+        <Button variant="success" onClick={handleLogout}>
+          Logout
+        </Button>{" "}
       </Navbar>
       <Jumbotron>
         <Container>
@@ -79,14 +70,14 @@ function AddPoll() {
                 />
               </Form.Group>
             </Form>
-            <Button
+            {/* <Button
               variant="primary"
               type="submit"
               disabled={title ? false : true}
               onClick={handleSubmit}
             >
               Add Question
-            </Button>
+            </Button> */}
           </div>
           <br />
           {options.map((option, i) => (
@@ -116,15 +107,19 @@ function AddPoll() {
           ))}
           <div>
             {title ? (
-              <Button onClick={handleAddOption} variant="primary">
+              options[options.length-1]===""?null:
+              <Button 
+              type="submit"
+              onClick={handleAddOption} variant="primary">
                 Add Option
               </Button>
             ) : null}
             {options.length ? (
-              <Button onClick={handlePollSubmit} variant="success">
+              <Button 
+               onClick={handlePollSubmit} variant="success">
                 Submit Poll
               </Button>
-            ) : null}
+            ) : null }
           </div>
         </Container>
       </Jumbotron>
