@@ -23,6 +23,7 @@ function Success() {
   useEffect(() => {
     dispatch(PollListRequest());
   }, []);
+  
   const pollList = useSelector((state) => state.PollListStatus.poll);
   useEffect(() => {
     setpoll(pollList);
@@ -37,7 +38,7 @@ function Success() {
     };
     dispatch1(PollRequest(Poll));
   };
-  console.log(item);
+ 
   const handleLogout = () => {
     localStorage.clear();
     history.push("/signinfrm");

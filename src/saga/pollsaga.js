@@ -1,5 +1,5 @@
 import { put, call } from "redux-saga/effects";
-import axiosCall from "../services/index";
+// import axiosCall from "../services/index";
 import axios from 'axios';
 
 import { PollListRequest, PollSuccess, PollError } from "../redux/action/actions";
@@ -14,21 +14,12 @@ export function* PollSaga(action) {
 
         let header = {
             "Content-Type": "application/json",
-            access_token: `${token}`,
+            access_token: token,
         }
-
-        // const url = `/do_vote?id=${id}&option_text=${text}`,
-
-        // const response = yield call(
-        //     axiosCall,
-        //     "POST",
-        //     url,
-        //     header
-        // );
 
         let response = yield call(
             axios.get,
-            `${process.env.REACT_APP_BASE_URL}/do_vote?id=${id}&option_text=${text}`,
+            `https://secure-refuge-14993.herokuapp.com/do_vote?id=${id}&option_text=${text}`,
             { headers: header }
         );
 
