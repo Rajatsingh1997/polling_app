@@ -45,6 +45,10 @@ function AddPoll() {
     return <Redirect to="/dashbord" />;
   }
 
+  const validateForm=()=>{
+    
+  }
+
   return (
     <div>
       <Navbar bg="light" expand="lg" className="box0">
@@ -90,6 +94,7 @@ function AddPoll() {
                     placeholder="Enter your option here"
                     value={options[i]}
                     onChange={(e) => handleonChangeAddOption(e, i)}
+                    onSubmit={validateForm()}
                   />
                   <span>
                     <Button
@@ -115,6 +120,7 @@ function AddPoll() {
               </Button>
             ) : null}
             {options.length ? (
+              options[options.length-1]===""?null:
               <Button 
                onClick={handlePollSubmit} variant="success">
                 Submit Poll

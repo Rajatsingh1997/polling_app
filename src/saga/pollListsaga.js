@@ -1,6 +1,6 @@
 import { put, call } from "redux-saga/effects";
 import axiosCall from "../services/index";
-import { PollListSuccess, PollListError} from "../redux/action/actions";
+import { PollListSuccess, PollListError,PollListRequest} from "../redux/action/actions";
 
 export function* pollListSaga(action){
     try{

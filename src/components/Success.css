@@ -1,0 +1,11 @@
+
+.previous btn btn btn-primary{
+    margin-left: 20px;
+    border: 2px solid;
+}
+.btn2.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    border: 2px solid;
+}

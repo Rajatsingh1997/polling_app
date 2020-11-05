@@ -8,9 +8,13 @@ import {
   Button,
   Spinner,
   Navbar,
+  Tooltip,
+  OverlayTrigger
+
 } from "react-bootstrap";
 import { PollListRequest } from "../redux/action/actions";
 import { PollRequest } from "../redux/action/actions";
+import "./Success.css";
 
 function Success() {
   const [error, seterror] = useState(false);
@@ -23,7 +27,7 @@ function Success() {
   useEffect(() => {
     dispatch(PollListRequest());
   }, []);
-  
+
   const pollList = useSelector((state) => state.PollListStatus.poll);
   useEffect(() => {
     setpoll(pollList);
@@ -38,7 +42,7 @@ function Success() {
     };
     dispatch1(PollRequest(Poll));
   };
- 
+
   const handleLogout = () => {
     localStorage.clear();
     history.push("/signinfrm");
@@ -46,7 +50,6 @@ function Success() {
   useEffect(() => {
     var item = poll[Math.floor(Math.random() * poll.length)];
     if (item) {
-  
       setItem(item);
     }
   }, [poll.length]);
@@ -57,8 +60,11 @@ function Success() {
   };
   const refreshPage = () => {
     window.location.reload(false);
-
   };
+
+  const func=()=>{
+    alert("previous option is locked");
+  }
   return (
     <div>
       <Navbar bg="light" expand="lg" className="box0">
@@ -99,12 +105,16 @@ function Success() {
               {!next ? null : (
                 <Button variant="primary" onClick={refreshPage}>
                   Next
-                </Button>
-              )}
+                 </Button>
+               )}
+               <Button className="btn2" variant="primary" onClick={func}>
+                  Previous
+                 </Button>
             </Card>
           )}
         </Container>
       </Jumbotron>
+   
     </div>
   );
 }

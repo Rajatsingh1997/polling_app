@@ -39,3 +39,5 @@ export function* PollSaga(action) {
         yield put(PollError("Unexpected error occured"));
     }
 }
+
+
